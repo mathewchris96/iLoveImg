@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Manipulation Options</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Image Manipulation Options</h1>
+    </header>
+    <div class="container">
+        <div class="preview-container">
+            <img id="imagePreview" src="placeholder.jpg" alt="Image preview">
+        </div>
+        <div class="manipulation-options">
+            <h2>Select Manipulation Options</h2>
+            <form id="manipulationForm">
+                <div>
+                    <label for="resizeOptions">Resize (width x height):</label>
+                    <input type="text" id="resizeOptions" name="resize" placeholder="e.g., 800x600">
+                </div>
+                <div>
+                    <label for="cropOptions">Crop (start x, start y, width, height):</label>
+                    <input type="text" id="cropOptions" name="crop" placeholder="e.g., 100,100,200,200">
+                </div>
+                <div>
+                    <label for="compressOptions">Compression Level (1-100):</label>
+                    <input type="number" id="compressOptions" name="compress" min="1" max="100" placeholder="e.g., 90">
+                </div>
+                <div>
+                    <button type="submit" id="submitButton">Apply Manipulations</button>
+                </div>
+            </form>
+            <div id="feedback"></div>
+        </div>
+        <div class="result-display" id="resultDisplay">
+            <!-- Results or download links will be displayed here after manipulation -->
+        </div>
+    </div>
+</body>
+</html>
