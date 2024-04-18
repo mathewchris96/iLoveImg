@@ -18,7 +18,7 @@
                     <input type="number" id="resize-width" name="resize-width" placeholder="Width" class="select-dropdown">
                     <label for="resize-height">Height:</label>
                     <input type="number" id="resize-height" name="resize-height" placeholder="Height" class="select-dropdown">
-                    <button type="button" class="option-button" onclick="resizeImage()">Resize Image</button>
+                    <button type="button" class="option-button" onclick="resizeImage(document.getElementById('resize-width').value, document.getElementById('resize-height').value)">Resize Image</button>
                 </div>
                 
                 <!-- Conversion Option -->
@@ -26,16 +26,20 @@
                     <label for="format-select">Convert Format:</label>
                     <select id="format-select" name="format" class="select-dropdown">
                         <option selected disabled>Select format...</option>
-                        <!-- Options will be dynamically added based on the uploaded image type -->
+                        <option value="png">PNG</option>
+                        <option value="jpeg">JPEG</option>
+                        <option value="gif">GIF</option>
+                        <option value="bmp">BMP</option>
+                        <option value="webp">WEBP</option>
                     </select>
-                    <button type="button" class="option-button" onclick="convertImage()">Convert Image</button>
+                    <button type="button" class="option-button" onclick="convertImage(document.getElementById('format-select').value)">Convert Image</button>
                 </div>
                 
                 <!-- Compression Option -->
                 <div class="compression-option">
                     <label for="compression-level">Compression Level:</label>
                     <input type="range" id="compression-level" name="compression-level" min="1" max="100" class="select-dropdown">
-                    <button type="button" class="option-button" onclick="compressImage()">Compress Image</button>
+                    <button type="button" class="option-button" onclick="compressImage(document.getElementById('compression-level').value)">Compress Image</button>
                 </div>
             </div>
             <div class="submit-options">
@@ -48,4 +52,3 @@
         </div>
     </div>
 </body>
-</html>

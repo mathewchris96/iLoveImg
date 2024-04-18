@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    console.log("Document loaded and script initiated."); // Added to verify file load
     const uploadForm = document.getElementById("upload-form");
     const fileInput = document.getElementById("file-input");
     const manipulationOptionsForm = document.getElementById("manipulation-options-form");
@@ -8,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Validate image upload form
     uploadForm.addEventListener("submit", function(e) {
+        console.log("Upload form submitted."); // Added to verify event listener trigger
         e.preventDefault();
         const file = fileInput.files[0];
         if (!file) {
@@ -52,17 +54,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to dynamically update manipulation options based on the uploaded image type
     function updateManipulationOptions(imageType) {
+        console.log("Updating manipulation options for image type:", imageType); // Added for debugging
         const formatSelect = document.getElementById("format-select");
         formatSelect.innerHTML = ""; // Clear previous options
-        if (imageType === "jpg") {
-            formatSelect.innerHTML = `<option value="png">Convert to PNG</option>`;
-        } else if (imageType === "png") {
-            formatSelect.innerHTML = `<option value="jpg">Convert to JPG</option>`;
+        if (imageType.toLowerCase() === "jpg") { // Adjusted to ensure case insensitivity
+            formatSelect.innerHTML += `<option value="png">Convert to PNG</option>`;
+        } else if (imageType.toLowerCase() === "png") { // Adjusted to ensure case insensitivity
+            formatSelect.innerHTML += `<option value="jpg">Convert to JPG</option>`;
+        }
+        // Example of extending functionality for more formats
+        else if (imageType.toLowerCase() === "gif") { // Adjusted to ensure case insensitivity
+            formatSelect.innerHTML += `<option value="jpg">Convert to JPG</option>`;
+            formatSelect.innerHTML += `<option value="png">Convert to PNG</option>`;
         }
     }
 
     // Function to handle manipulation options form submission
     manipulationOptionsForm.addEventListener("submit", function(e) {
+        console.log("Manipulation options form submitted."); // Added to verify event listener trigger
         e.preventDefault();
         showLoadingIndicator(); // Show loading indicator when image is being manipulated
         const formData = new FormData(manipulationOptionsForm);
@@ -104,5 +113,17 @@ document.addEventListener("DOMContentLoaded", function() {
     function hideLoadingIndicator() {
         loadingIndicator.style.display = "none";
     }
+
+    // Define the convertImage function with actual logic
+    window.convertImage = function(imageData, conversionOptions) {
+        console.log('Converting image with options', conversionOptions);
+        // Example conversion logic (to be replaced with actual logic or API call)
+        if(conversionOptions.format === 'png') {
+            console.log('Converting image to PNG format');
+        } else if(conversionOptions.format === 'jpg') {
+            console.log('Converting image to JPG format');
+        } else {
+            console.log('Invalid image format selected for conversion');
+        }
+    };
 });
-```
