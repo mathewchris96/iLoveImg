@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert Image to PNG</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="upload.html">Upload Image</a>
+        <a href="manipulation-options.html">Manipulation Options</a>
+    </nav>
+    <main>
+        <section>
+            <h1>Convert Image to PNG</h1>
+            <p>Please select the JPG image you want to convert to PNG format.</p>
+            <input type="file" id="imageInput" accept="image/jpeg">
+            <button id="convertBtn">Convert to PNG</button>
+            <div id="downloadLinkContainer" style="margin-top: 20px;"></div>
+        </section>
+    </main>
+    <script>
+        document.getElementById('convertBtn').addEventListener('click', function() {
+            const inputElement = document.getElementById('imageInput');
+            if(inputElement.files.length > 0) {
+                const file = inputElement.files[0];
+                if(file.type === "image/jpeg") {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = event.target.result;
+                        imgElement.onload = function() {
+                            // Create canvas
+                            const canvas = document.createElement('canvas');
+                            canvas.width = imgElement.width;
+                            canvas.height = imgElement.height;
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(imgElement, 0, 0);
+                            canvas.toBlob(function(blob) {
+                                const newImgUrl = URL.createObjectURL(blob);
+                                const downloadLink = document.createElement('a');
+                                downloadLink.href = newImgUrl;
+                                downloadLink.download = "converted_image.png";
+                                downloadLink.textContent = "Download PNG Image";
+                                const downloadLinkContainer = document.getElementById('downloadLinkContainer');
+                                downloadLinkContainer.innerHTML = ''; // Clear previous links
+                                downloadLinkContainer.appendChild(downloadLink);
+                            }, 'image/png');
+                        }
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Please upload a JPG image.");
+                }
+            } else {
+                alert("Please select an image to convert.");
+            }
+        });
+    </script>
+</body>
+</html>

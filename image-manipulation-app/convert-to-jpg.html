@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert PNG to JPG</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="upload.html">Upload New Image</a>
+        <a href="manipulation-options.html">Manipulation Options</a>
+    </nav>
+    <main>
+        <section>
+            <h1>Convert PNG to JPG</h1>
+            <p>This tool allows you to convert your PNG images to JPG format. Select your PNG image and click on "Convert" to start the process.</p>
+            <input type="file" id="pngInput" accept="image/png">
+            <button id="convertBtn">Convert</button>
+            <br>
+            <a id="downloadLink" style="display:none;">Download JPG</a>
+        </section>
+    </main>
+    <script>
+        document.getElementById('convertBtn').addEventListener('click', function() {
+            const input = document.getElementById('pngInput');
+            if(input.files && input.files[0]) {
+                const file = input.files[0];
+                if(file.type === "image/png") {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = new Image();
+                        img.onload = function() {
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+                            canvas.width = img.width;
+                            canvas.height = img.height;
+                            ctx.drawImage(img, 0, 0);
+                            canvas.toBlob(function(blob) {
+                                const newImgUrl = URL.createObjectURL(blob);
+                                const downloadLink = document.getElementById('downloadLink');
+                                downloadLink.href = newImgUrl;
+                                downloadLink.download = "converted_image.jpg";
+                                downloadLink.style.display = 'inline';
+                                downloadLink.textContent = 'Download JPG';
+                            }, 'image/jpeg', 0.92); // JPEG at 92% quality
+                        }
+                        img.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Please upload a PNG image.");
+                }
+            } else {
+                alert("Please select a file first.");
+            }
+        });
+    </script>
+</body>
+</html>
