@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Manipulation Result</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="../static/script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Image Manipulation Result</h1>
+    </header>
+    <div class="container">
+        <div class="result-display">
+            <h2>Manipulated Image</h2>
+            <!-- Display the manipulated image or error message -->
+            <img id="manipulatedImage" src="" alt="Manipulated Image" style="display: none;">
+            <p id="feedback"></p>
+            <a href="" id="downloadLink" style="display: none;">Download Image</a>
+            <button onclick="window.history.back();">Go Back</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const feedbackElement = document.getElementById("feedback");
+            const manipulatedImage = document.getElementById("manipulatedImage");
+            const downloadLink = document.getElementById("downloadLink");
+
+            // Assuming the manipulated image data is available in sessionStorage
+            const imageData = sessionStorage.getItem("manipulatedImageData");
+            const imageUrl = sessionStorage.getItem("manipulatedImageUrl");
+
+            if (imageData && imageUrl) {
+                manipulatedImage.src = imageUrl;
+                manipulatedImage.style.display = "block";
+                downloadLink.href = imageUrl;
+                downloadLink.style.display = "inline-block";
+                feedbackElement.textContent = "Image manipulated successfully. You can download it now.";
+            } else {
+                feedbackElement.textContent = "Failed to retrieve manipulated image. Please try again.";
+            }
+        });
+    </script>
+</body>
+</html>
