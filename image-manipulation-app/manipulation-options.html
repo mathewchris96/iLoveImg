@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Manipulation Options</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="upload.html">Upload New Image</a>
+    </nav>
+    <main>
+        <section>
+            <h1>Choose Manipulation Option</h1>
+            <div class="options-container">
+                <!-- Button for resizing image -->
+                <button onclick="location.href='resize-image.html'">Resize Image</button>
+                <!-- Button for converting image to JPG -->
+                <button onclick="location.href='convert-to-jpg.html'">Convert to JPG</button>
+                <!-- Button for converting image to PNG -->
+                <button onclick="location.href='convert-to-png.html'">Convert to PNG</button>
+                <!-- Button for applying black and white filter -->
+                <button onclick="location.href='apply-filter.html'">Apply Black and White Filter</button>
+                <!-- Button for compressing image -->
+                <button onclick="location.href='compress-image.html'">Compress Image</button>
+            </div>
+        </section>
+    </main>
+    <script>
+        // Functionality to enhance user experience with better navigational script
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('button').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    window.location.href = this.getAttribute('onclick').match(/'(.*)'/)[1];
+                });
+            });
+        });
+    </script>
+</body>
+</html>
