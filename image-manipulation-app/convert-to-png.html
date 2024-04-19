@@ -23,41 +23,58 @@
     </main>
     <script>
         document.getElementById('convertBtn').addEventListener('click', function() {
-            const inputElement = document.getElementById('imageInput');
-            if(inputElement.files.length > 0) {
-                const file = inputElement.files[0];
-                if(file.type === "image/jpeg") {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        const imgElement = document.createElement('img');
-                        imgElement.src = event.target.result;
-                        imgElement.onload = function() {
-                            // Create canvas
-                            const canvas = document.createElement('canvas');
-                            canvas.width = imgElement.width;
-                            canvas.height = imgElement.height;
-                            const ctx = canvas.getContext('2d');
-                            ctx.drawImage(imgElement, 0, 0);
-                            canvas.toBlob(function(blob) {
-                                const newImgUrl = URL.createObjectURL(blob);
-                                const downloadLink = document.createElement('a');
-                                downloadLink.href = newImgUrl;
-                                downloadLink.download = "converted_image.png";
-                                downloadLink.textContent = "Download PNG Image";
-                                const downloadLinkContainer = document.getElementById('downloadLinkContainer');
-                                downloadLinkContainer.innerHTML = ''; // Clear previous links
-                                downloadLinkContainer.appendChild(downloadLink);
-                            }, 'image/png');
-                        }
-                    }
-                    reader.readAsDataURL(file);
-                } else {
-                    alert("Please upload a JPG image.");
-                }
-            } else {
-                alert("Please select an image to convert.");
-            }
+            convertImageToPNG();
         });
+
+        function convertImageToPNG() {
+            const inputElement = document.getElementById('imageInput');
+            if(inputElement.files.length === 0) {
+                alert("Please select an image to convert.");
+                return;
+            }
+
+            const file = inputElement.files[0];
+            if(file.type !== "image/jpeg") {
+                alert("Please upload a JPG image.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                createImageElement(event.target.result);
+            }
+            reader.readAsDataURL(file);
+        }
+
+        function createImageElement(imageSrc) {
+            const imgElement = document.createElement('img');
+            imgElement.src = imageSrc;
+            imgElement.onload = function() {
+                convertToPNG(imgElement);
+            }
+        }
+
+        function convertToPNG(imgElement) {
+            const canvas = document.createElement('canvas');
+            canvas.width = imgElement.width;
+            canvas.height = imgElement.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(imgElement, 0, 0);
+            canvas.toBlob(function(blob) {
+                const newImgUrl = URL.createObjectURL(blob);
+                createDownloadLink(newImgUrl);
+            }, 'image/png');
+        }
+
+        function createDownloadLink(newImgUrl) {
+            const downloadLink = document.createElement('a');
+            downloadLink.href = newImgUrl;
+            downloadLink.download = "converted_image.png";
+            downloadLink.textContent = "Download PNG Image";
+            const downloadLinkContainer = document.getElementById('downloadLinkContainer');
+            downloadLinkContainer.innerHTML = ''; // Clear previous links
+            downloadLinkContainer.appendChild(downloadLink);
+        }
     </script>
 </body>
 </html>

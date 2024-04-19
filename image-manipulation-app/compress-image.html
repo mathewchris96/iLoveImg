@@ -5,12 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compress Image</title>
     <link rel="stylesheet" href="styles/main.css">
+    <style>
+        /* Adding visual separation styling for the navbar */
+        .navbar {
+            border-bottom: 2px solid #ccc; /* Example of a visual separation */
+            padding-bottom: 10px; /* Additional styling for consistency */
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
         <a href="index.html">Home</a>
         <a href="upload.html">Upload Image</a>
-        <a href="manipulation-options.html">Manipulation Options</a>
+        <!-- Removed navigation option based on instructions -->
     </nav>
     <main>
         <section>
@@ -27,17 +34,14 @@
     <script>
         document.getElementById('compressBtn').addEventListener('click', function() {
             var compressionLevel = document.getElementById('compressionLevel').value;
-            // In a real scenario, this would involve reading the uploaded image,
-            // applying compression using a library or API, and then providing the output for download.
-            // Integration with an API or JavaScript library for image manipulation should be implemented here.
             setTimeout(function() {
                 var downloadLink = document.getElementById('downloadLink');
-                downloadLink.href = 'compressed_image.jpg'; // Dynamic path for the compressed image
-                downloadLink.download = 'compressed_image.jpg'; // Suggest a filename for download
+                downloadLink.href = 'compressed_image.jpg';
+                downloadLink.download = 'compressed_image.jpg';
                 downloadLink.style.display = 'inline';
                 downloadLink.textContent = 'Download Compressed Image';
                 alert('Image has been compressed to ' + compressionLevel + '% of its original size.');
-            }, 1000); // Simulate compression delay
+            }, 1000);
         });
     </script>
 </body>
