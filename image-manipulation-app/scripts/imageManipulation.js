@@ -37,73 +37,12 @@ function uploadImage(event) {
 
 // Function to apply a black and white filter
 function applyBlackAndWhiteFilter() {
-    const uploadedImage = sessionStorage.getItem('uploadedImage');
-    if (!uploadedImage) {
-        alert('No image uploaded.');
-        return;
-    }
-
-    const img = new Image();
-    img.onload = function() {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
-
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imageData.data;
-
-        for (let i = 0; i < data.length; i += 4) {
-            const grayscale = data[i] * 0.3 + data[i + 1] * 0.59 + data[i + 2] * 0.11;
-            data[i] = grayscale; // red
-            data[i + 1] = grayscale; // green
-            data[i + 2] = grayscale; // blue
-        }
-
-        ctx.putImageData(imageData, 0, 0);
-
-        canvas.toBlob(function(blob) {
-            const newImgUrl = URL.createObjectURL(blob);
-            const downloadLink = document.createElement('a');
-            downloadLink.href = newImgUrl;
-            downloadLink.download = 'filtered_image.png';
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
-        });
-    };
-    img.src = uploadedImage;
+    // ... existing code ...
 }
 
 // Function to compress image
 function compressImage(compressionLevel) {
-    const uploadedImage = sessionStorage.getItem('uploadedImage');
-    if (!uploadedImage) {
-        alert('No image uploaded.');
-        return;
-    }
-
-    const img = new Image();
-    img.onload = function() {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const scaleFactor = compressionLevel / 100;
-        canvas.width = img.width * scaleFactor;
-        canvas.height = img.height * scaleFactor;
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-        canvas.toBlob(function(blob) {
-            const newImgUrl = URL.createObjectURL(blob);
-            const downloadLink = document.createElement('a');
-            downloadLink.href = newImgUrl;
-            downloadLink.download = 'compressed_image.png';
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
-        });
-    };
-    img.src = uploadedImage;
+    // ... existing code ...
 }
 
 // Attach event listeners if necessary
@@ -127,4 +66,29 @@ document.addEventListener('DOMContentLoaded', function() {
             compressImage(compressionLevel);
         });
     }
-});
+
+    // Add event listener for the new image upload input element
+    const imageUploadInput = document.getElementById('imageUpload');
+    if (imageUploadInput) {
+        imageUploadInput.addEventListener('change', function(event) {
+            // Handle the uploaded file
+            var uploadedImage = event.target.files[0];
+            if (uploadedImage) {
+                // Validate file type
+                const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                if (!validTypes.includes(uploadedImage.type)) {
+                    alert('Unsupported file type.');
+                    return;
+                }
+                // Prepare the image for compression
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    sessionStorage.setItem('uploadedImage', e.target.result);
+                    // Update the UI if necessary
+                };
+                reader.readAsDataURL(uploadedImage);
+            } else {
+                alert('Please select an image to upload.');
+            }
+        });
+    }

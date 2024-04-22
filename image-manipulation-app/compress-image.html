@@ -16,6 +16,9 @@
         <section>
             <h1>Compress Your Image</h1>
             <p>Select compression level and compress your image.</p>
+            <!-- Inserted file input element for image upload -->
+            <input type="file" name="uploadedImage" id="imageUpload" accept="image/*">
+            <br>
             <input type="range" id="compressionLevel" name="compressionLevel" min="0" max="100" value="50">
             <label for="compressionLevel">Compression Level</label>
             <br>
@@ -41,4 +44,3 @@
         });
     </script>
 </body>
-</html>
