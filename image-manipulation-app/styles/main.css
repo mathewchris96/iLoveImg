@@ -38,6 +38,7 @@ body {
   color: white;
   margin-right: 15px;
   font-size: var(--font-size-large);
+  border: 1px solid #000; /* Added border style to navbar links */
 }
 
 .navbar a:hover {
@@ -86,4 +87,3 @@ input[type="file"] {
     width: 100%;
     margin-bottom: 10px;
   }
-}
