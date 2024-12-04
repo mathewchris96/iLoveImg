@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Manipulation Website</title>
+    <!-- Bootstrap CSS for styling and responsiveness -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Link to the external CSS file for additional styling -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Link to the external JavaScript file for functionality -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">Image Manipulation Tool</h1>
+        <!-- Image upload form -->
+        <div class="upload-form">
+            <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file-input">Upload your image</label>
+                    <input type="file" class="form-control-file" id="file-input" name="image" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Upload Image</button>
+            </form>
+        </div>
+    </div>
+    <!-- Bootstrap and jQuery for Bootstrap functionality -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

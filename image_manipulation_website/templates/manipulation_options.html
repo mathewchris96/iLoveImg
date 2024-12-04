@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Manipulation Options</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Manipulation Options</h2>
+        <form id="manipulation-options-form">
+            <div class="manipulation-options">
+                <!-- Resize Option -->
+                <div class="resize-option">
+                    <label for="resize-width">Width:</label>
+                    <input type="number" id="resize-width" name="resize-width" placeholder="Width" class="select-dropdown">
+                    <label for="resize-height">Height:</label>
+                    <input type="number" id="resize-height" name="resize-height" placeholder="Height" class="select-dropdown">
+                    <button type="button" class="option-button" onclick="resizeImage(document.getElementById('resize-width').value, document.getElementById('resize-height').value)">Resize Image</button>
+                </div>
+                
+                <!-- Conversion Option -->
+                <div class="conversion-option">
+                    <label for="format-select">Convert Format:</label>
+                    <select id="format-select" name="format" class="select-dropdown">
+                        <option selected disabled>Select format...</option>
+                        <option value="png">PNG</option>
+                        <option value="jpeg">JPEG</option>
+                        <option value="gif">GIF</option>
+                        <option value="bmp">BMP</option>
+                        <option value="webp">WEBP</option>
+                    </select>
+                    <button type="button" class="option-button" onclick="convertImage(document.getElementById('format-select').value)">Convert Image</button>
+                </div>
+                
+                <!-- Compression Option -->
+                <div class="compression-option">
+                    <label for="compression-level">Compression Level:</label>
+                    <input type="range" id="compression-level" name="compression-level" min="1" max="100" class="select-dropdown">
+                    <button type="button" class="option-button" onclick="compressImage(document.getElementById('compression-level').value)">Compress Image</button>
+                </div>
+            </div>
+            <div class="submit-options">
+                <button type="submit" class="option-button">Apply Manipulations</button>
+            </div>
+        </form>
+        <div id="result-section" style="display:none;">
+            <img id="result-image" src="" alt="Manipulated Image" class="result-image">
+            <a id="download-link" href="#" class="download-link">Download Manipulated Image</a>
+        </div>
+    </div>
+</body>
