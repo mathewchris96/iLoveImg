@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Manipulation Website</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Uploads</a></li>
+            </ul>
+        </nav>
+        <div class="container">
+            <h1>Welcome to the Image Manipulation Website</h1>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section class="welcome-message">
+                <p>Here, you can easily upload, resize, crop, and compress your images. Start by uploading an image to see the available options.</p>
+                <button onclick="location.href='#uploadForm';">Upload Image</button>
+            </section>
+            <section class="upload-form">
+                <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" id="fileInput" name="image" required>
+                    <input type="submit" value="Upload Image" id="submitButton">
+                </form>
+            </section>
+            <section>
+                <div id="manipulationOptions" class="manipulation-options">
+                    <label for="resizeOptions">Resize Options:</label>
+                    <select id="resizeOptions">
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+                    <label for="cropOptions">Crop Options:</label>
+                    <select id="cropOptions">
+                        <option value="square">Square</option>
+                        <option value="rectangle">Rectangle</option>
+                    </select>
+                    <label for="compressOptions">Compress Options:</label>
+                    <select id="compressOptions">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div id="feedback"></div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Image Manipulation Website. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
