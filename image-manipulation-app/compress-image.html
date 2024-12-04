@@ -16,11 +16,15 @@
         <section>
             <h1>Compress Your Image</h1>
             <p>Select compression level and compress your image.</p>
+            <input type="file" id="imageUpload" accept="image/*">
+            <label for="imageUpload">Upload Image</label>
+            <br>
             <input type="range" id="compressionLevel" name="compressionLevel" min="0" max="100" value="50">
             <label for="compressionLevel">Compression Level</label>
             <br>
             <button id="compressBtn">Compress</button>
             <br>
+            <img id="displayedImage" style="display:none;" alt="Compressed Image Preview">
             <a id="downloadLink" style="display:none;">Download Compressed Image</a>
         </section>
     </main>
@@ -40,5 +44,6 @@
             }, 1000); // Simulate compression delay
         });
     </script>
+    <script src="compress-image.js"></script>
 </body>
 </html>

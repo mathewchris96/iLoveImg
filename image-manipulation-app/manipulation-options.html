@@ -7,36 +7,32 @@
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="upload.html">Upload New Image</a>
-    </nav>
-    <main>
-        <section>
-            <h1>Choose Manipulation Option</h1>
-            <div class="options-container">
-                <!-- Button for resizing image -->
-                <button onclick="location.href='resize-image.html'">Resize Image</button>
-                <!-- Button for converting image to JPG -->
-                <button onclick="location.href='convert-to-jpg.html'">Convert to JPG</button>
-                <!-- Button for converting image to PNG -->
-                <button onclick="location.href='convert-to-png.html'">Convert to PNG</button>
-                <!-- Button for applying black and white filter -->
-                <button onclick="location.href='apply-filter.html'">Apply Black and White Filter</button>
-                <!-- Button for compressing image -->
-                <button onclick="location.href='compress-image.html'">Compress Image</button>
-            </div>
-        </section>
-    </main>
-    <script>
-        // Functionality to enhance user experience with better navigational script
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('button').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    window.location.href = this.getAttribute('onclick').match(/'(.*)'/)[1];
-                });
-            });
+
+<div class="nav-bar">
+    <!-- Link back to home page -->
+    <a href="index.html">Home</a>
+</div>
+
+<div class="manipulation-options">
+    <h1>Choose a manipulation option:</h1>
+    <ul>
+        <li><a href="#">Convert to JPG</a></li>
+        <li><a href="#">Convert to PNG</a></li>
+        <li><a href="#">Apply Black and White Filter</a></li>
+        <li><a href="#">Compress Image</a></li>
+    </ul>
+</div>
+
+<!-- Basic logic for options (since specific logic is not provided, this serves as a placeholder) -->
+<script>
+    document.querySelectorAll('.manipulation-options ul li a').forEach(item => {
+        item.addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent the default anchor action
+            alert("Option selected: " + this.innerText);
+            // Logic to handle each option would go here
         });
-    </script>
+    });
+</script>
+
 </body>
 </html>
