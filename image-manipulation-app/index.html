@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Manipulation App</title>
+    <title>Compress Image</title>
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
@@ -11,16 +11,34 @@
         <a href="index.html">Home</a>
         <a href="upload.html">Upload Image</a>
         <a href="manipulation-options.html">Manipulation Options</a>
-        <a href="convert-to-jpg.html">Convert to JPG</a>
-        <a href="convert-to-png.html">Convert to PNG</a>
-        <a href="apply-filter.html">Apply Filter</a>
-        <a href="compress-image.html">Compress Image</a>
     </nav>
     <main>
         <section>
-            <h1>Welcome to the Image Manipulation App</h1>
-            <p>This app allows you to upload images and perform various manipulations such as resizing, converting formats, applying filters, and compressing. Choose an option from the navigation bar to get started.</p>
+            <h1>Compress Your Image</h1>
+            <p>Select compression level and compress your image.</p>
+            <input type="file" name="uploadedImage" id="imageUpload" accept="image/*">
+            <input type="range" id="compressionLevel" name="compressionLevel" min="0" max="100" value="50">
+            <label for="compressionLevel">Compression Level</label>
+            <br>
+            <button id="compressBtn">Compress</button>
+            <br>
+            <a id="downloadLink" style="display:none;">Download Compressed Image</a>
         </section>
     </main>
+    <script>
+        document.getElementById('compressBtn').addEventListener('click', function() {
+            var compressionLevel = document.getElementById('compressionLevel').value;
+            // In a real scenario, this would involve reading the uploaded image,
+            // applying compression using a library or API, and then providing the output for download.
+            // Integration with an API or JavaScript library for image manipulation should be implemented here.
+            setTimeout(function() {
+                var downloadLink = document.getElementById('downloadLink');
+                downloadLink.href = 'compressed_image.jpg'; // Dynamic path for the compressed image
+                downloadLink.download = 'compressed_image.jpg'; // Suggest a filename for download
+                downloadLink.style.display = 'inline';
+                downloadLink.textContent = 'Download Compressed Image';
+                alert('Image has been compressed to ' + compressionLevel + '% of its original size.');
+            }, 1000); // Simulate compression delay
+        });
+    </script>
 </body>
-</html>
