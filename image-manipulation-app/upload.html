@@ -1,32 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Image</title>
-    <link rel="stylesheet" href="styles/main.css">
-</head>
-<body>
-    <nav class="navbar">
-        <a href="index.html">Home</a>
-    </nav>
-    <main>
-        <section>
-            <h1>Upload your image</h1>
-            <form action="manipulation-options.html" method="post" enctype="multipart/form-data" id="uploadForm">
-                <input type="file" id="imageInput" name="image" accept="image/*" required>
-                <button type="submit">Upload Image</button>
-            </form>
-        </section>
-    </main>
-    <script>
-        document.getElementById('uploadForm').addEventListener('submit', function(event) {
-            const imageInput = document.getElementById('imageInput');
-            if (!imageInput.files.length) {
-                alert('Please select an image to upload.');
-                event.preventDefault(); // Prevent form submission
-            }
-        });
-    </script>
-</body>
-</html>
+<nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="hello.html">Hello</a>
+    <a href="upload.html">Upload Image</a>
+    <a href="manipulation-options.html">Manipulation Options</a>
+    <a href="convert-to-jpg.html">Convert to JPG</a>
+    <a href="convert-to-png.html">Convert to PNG</a>
+    <a href="apply-filter.html">Apply Filter</a>
+    <a href="compress-image.html">Compress Image</a>
+</nav>
