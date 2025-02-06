@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPEG to PDF Converter</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Convert JPEG to PDF</h1>
+        <input type="file" id="jpegInput" accept="image/jpeg" class="file-input">
+        <button id="convertToPdfBtn" class="convert-button">Convert to PDF</button>
+        <div id="downloadLinkSection" class="download-section" style="display: none;">
+            <a id="downloadLink" href="#" download="converted.pdf">Download PDF</a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="scripts/imageManipulation.js"></script>
+    <script>
+        document.getElementById('convertToPdfBtn').addEventListener('click', function() {
+            const fileInput = document.getElementById('jpegInput');
+            if (fileInput.files && fileInput.files[0]) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgData = e.target.result;
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF();
+                    pdf.addImage(imgData, 'JPEG', 10, 10);
+                    const pdfOutput = pdf.output('blob');
+                    const downloadLink = document.getElementById('downloadLink');
+                    downloadLink.href = URL.createObjectURL(pdfOutput);
+                    document.getElementById('downloadLinkSection').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please select a JPEG file to convert.');
+            }
+        });
+    </script>
+</body>
+</html>
